@@ -1,23 +1,27 @@
-**Classification des Styles Architecturaux par CNN**
+# Architectural Style Classification Using Convolutional Neural Networks
 
-📌 **Description du projet**
+## Overview
 
-Ce projet consiste à développer un modèle de Deep Learning basé sur un _CNN (Convolutional Neural Network)_ capable de classifier des images selon leur style architectural.
+This project presents a Convolutional Neural Network (CNN) model designed to classify architectural styles from images.  
+The model learns visual patterns and structural features specific to different architectural categories and predicts the class of unseen images.
 
-Le modèle est entraîné sur un dataset d’images organisées par catégories architecturales, puis testé sur plusieurs images afin d’évaluer ses performances.
+This work demonstrates the application of deep learning and computer vision techniques in multi-class image classification.
 
+---
 
-🧠** Objectif**
-L’objectif principal est de :
+## Objectives
 
-Construire un modèle CNN pour la classification d’images
-Appliquer les techniques de prétraitement des images
-Diviser le dataset en entraînement et validation
-Évaluer la performance du modèle
-Tester le modèle sur de nouvelles images
+- Develop a CNN-based image classification model
+- Preprocess and organize architectural image datasets
+- Split the dataset into training and validation sets
+- Evaluate model performance using accuracy and loss metrics
+- Perform predictions on new architectural images
 
-📂** Dataset**
-Le dataset est fourni sous forme d’un fichier .zip contenant plusieurs dossiers :
+---
+
+## Dataset
+
+The dataset is organized into directories, where each directory represents a specific architectural style:
 
 Dataset/
 │
@@ -27,115 +31,141 @@ Dataset/
 ├── Amazigh/
 ├── Buddhist/
 ├── Egyptian/
-├── ...
+└── ...
 
-Chaque dossier représente une classe architecturale.
+Each folder contains images corresponding to one architectural category.
 
-Le dataset est divisé automatiquement en :
+The dataset is divided into:
+- 80% training data
+- 20% validation data
 
-**80%** → Training set
-**20%** → Validation set
+The split is performed programmatically using the `split-folders` library.
 
-Grâce à la bibliothèque split-folders.
+---
 
-⚙️** Technologies utilisées**
-Python
-TensorFlow / Keras
-NumPy
-Matplotlib
-split-folders
-Google Colab
-🧱 Architecture du Modèle CNN
+## Model Architecture
 
-Le modèle Sequential contient :
+The CNN model is implemented using the Keras Sequential API.
 
-🔹 Conv2D (32 filtres)
-🔹 MaxPooling
-🔹 Conv2D (64 filtres)
-🔹 MaxPooling
-🔹 Conv2D (128 filtres)
-🔹 MaxPooling
-🔹 Flatten
-🔹 Dense (256 neurones)
-🔹 Dropout (0.5)
-🔹 Dense (Softmax – classification multi-classe)
+Architecture:
 
-Taille des images :
-224 x 224 x 3
+- Conv2D (32 filters, ReLU activation)
+- MaxPooling2D
+- Conv2D (64 filters, ReLU activation)
+- MaxPooling2D
+- Conv2D (128 filters, ReLU activation)
+- MaxPooling2D
+- Flatten
+- Dense (256 neurons, ReLU activation)
+- Dropout (0.5)
+- Dense (Softmax activation for multi-class classification)
 
-Batch size :
-32
+Training configuration:
 
-Nombre d’epochs :
-50
+- Image size: 224 x 224
+- Batch size: 32
+- Epochs: 50
+- Optimizer: Adam
+- Loss function: Categorical Crossentropy
 
-📊** Analyse des données**
+---
 
-Une visualisation est réalisée pour analyser la répartition des images par classe dans le dataset d’entraînement.
+## Training and Evaluation
 
-Cela permet de vérifier l’équilibre entre les différentes catégories architecturales.
+During training, the following metrics are monitored:
 
-🚀 Entraînement du modèle
+- Training accuracy
+- Validation accuracy
+- Training loss
+- Validation loss
 
-Le modèle est entraîné avec :
+Performance curves are generated to analyze model behavior and detect overfitting or underfitting.
 
-model.fit(
-    train_gen,
-    validation_data=val_gen,
-  _ ** epochs=50**_
-)
+---
 
-Les métriques suivies :
+## Model Saving
 
-Accuracy
-Loss
-Validation Accuracy
-Validation Loss
-
-Des graphiques sont générés pour analyser :
-
-L’évolution de la précision
-L’évolution de la perte
-
-💾 Sauvegarde du modèle
-Le modèle entraîné est sauvegardé au format :
+The trained model is saved in HDF5 format:
 
 mydata.h5
-🖼️ Tests du modèle
 
-Le modèle est testé sur plusieurs images :
+This allows the model to be reused for prediction without retraining.
 
-_**Russian architecture
-Moorish architecture
-Amazigh architecture
-Gothic architecture
-Buddhist architecture
-Egyptian architecture**_
+---
 
-Chaque image est :
-Redimensionnée en 224x224
-Normalisée
-Prédite par le modèle
-Affichée avec la classe prédite
+## Prediction Pipeline
 
-📈** Résultats**
+For prediction, each image is:
 
-Le modèle obtient des résultats satisfaisants sur les images de test.
+1. Resized to 224 x 224
+2. Normalized
+3. Converted to array format
+4. Passed through the trained model
 
-Les performances peuvent être améliorées par :
+The Softmax output layer determines the predicted architectural class.
 
-Data augmentation
-Transfer Learning (VGG16, ResNet…)
-Augmentation du dataset
-Fine-tuning
+---
 
- Améliorations futures
-Utilisation du Transfer Learning
-Optimisation des hyperparamètres
-Déploiement sous forme d’application web
-Création d’une interface utilisateur
+## Technologies Used
 
-** Conclusion**
-Ce projet démontre l’efficacité des réseaux de neurones convolutifs pour la classification d’images architecturales.
+- Python
+- TensorFlow
+- Keras
+- NumPy
+- Matplotlib
+- split-folders
+- Jupyter Notebook / Google Colab
 
-Il constitue une base solide pour des projets plus avancés en vision par ordinateur et Deep Learning.
+---
+
+## Project Structure
+
+├── Dataset/
+├── train/
+├── val/
+├── mydata.h5
+├── notebook.ipynb
+└── README.md
+
+---
+
+## How to Run
+
+1. Clone the repository:
+
+git clone https://github.com/your-username/your-repository-name.git
+cd your-repository-name
+
+2. Install dependencies:
+
+pip install -r requirements.txt
+
+3. Run the notebook:
+
+jupyter notebook
+
+Execute all cells to train and evaluate the model.
+
+---
+
+## Future Improvements
+
+- Apply transfer learning (VGG16, ResNet, EfficientNet)
+- Add data augmentation
+- Perform hyperparameter tuning
+- Deploy as a web application
+
+---
+
+## Authors
+
+Assia Mouad  
+Imane Ait Elmir  
+
+Master ISI – Academic Year 2025/2026
+
+---
+
+## License
+
+This project is developed for academic purposes.
