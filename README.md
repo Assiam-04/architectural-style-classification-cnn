@@ -129,24 +129,6 @@ The Softmax output layer determines the predicted architectural class.
 
 ---
 
-## How to Run
-
-1. Clone the repository:
-
-git clone https://github.com/your-username/your-repository-name.git
-cd your-repository-name
-
-2. Install dependencies:
-
-pip install -r requirements.txt
-
-3. Run the notebook:
-
-jupyter notebook
-
-Execute all cells to train and evaluate the model.
-
----
 
 ## Future Improvements
 
